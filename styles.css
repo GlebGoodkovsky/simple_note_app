@@ -1,0 +1,18 @@
+body {
+    font-family: sans-serif; /* Use a nicer font */    
+    align-items: center;
+    /* These next two lines are just part of the centering spell */
+    display: flex;
+    flex-direction: column;
+}
+
+/* Style each note that gets added */
+#notes-list li {
+    margin-top: 5px;         /* Add a tiny bit of space between notes */
+    padding: 6px;            /* Add a tiny bit of space inside the note box */
+}
+
+/* Add some space above the button */
+#add-button {
+    margin-top: 8px; /* Pushes the button down by 8 pixels */
+}
