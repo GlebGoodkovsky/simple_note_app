@@ -50,7 +50,7 @@ body {
 #add-button {
     margin-top: 8px;
 }
-'''
+```
 
 - `body`: This styles the whole page. It sets a cleaner font and uses the `display: flex` rules as a simple way to center everything horizontally.
 - `#notes-list li`: This styles every note that gets created. It adds a little space between the notes (`margin-top`) and a little space inside each note's box (`padding`).
