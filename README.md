@@ -50,11 +50,20 @@ body {
 #add-button {
     margin-top: 8px;
 }
+
+#notes-list button {
+    margin-left: 10px;
+    cursor: pointer;
+    color: red;
+    background-color: rgb(255, 227, 227);
+    border-color: coral;
+}
 ```
 
-- `body`: This styles the whole page. It sets a cleaner font and uses the `display: flex` rules as a simple way to center everything horizontally.
-- `#notes-list li`: This styles every note that gets created. It adds a little space between the notes (`margin-top`) and a little space inside each note's box (`padding`).
-- `#add-button`: This finds the button and just adds a little empty space above it to separate it from the text box.
+- `body`: Styles the whole page. Uses a clean font and centers everything with flexbox.
+- `#notes-list li`: Adds space between notes and a bit of padding inside each one.
+- `#add-button`: Adds space above the "Add" button so it's not squished against the input box.
+- `#notes-list button`: Styles the delete button. Pushes it away from the note text, makes the cursor a pointer, and gives it red-ish colors so it stands out.
 
 ---
 #### HTML
@@ -97,28 +106,39 @@ const addButton = document.getElementById('add-button');
 const notesList = document.getElementById('notes-list');
 
 addButton.addEventListener('click', function() {
+    const userText = noteInput.value;
+    const newNote = document.createElement('li');
+    newNote.textContent = userText;
 
-  const userText = noteInput.value;
+    const deleteButton = document.createElement('button');
+    deleteButton.textContent = "Delete";
 
-  const newNote = document.createElement('li');
+    deleteButton.addEventListener('click', function() {
+     newNote.remove();
+    });
 
-  newNote.textContent = userText;
-
+  newNote.appendChild(deleteButton);
   notesList.appendChild(newNote);
-
   noteInput.value = "";
 
 });
 ```
 
-1. **Finding the HTML Parts:** The first three lines find the text box, the button, and the list from the HTML page and give them simple nicknames (`noteInput`, `addButton`, `notesList`) so our script can use them easily.
+1. **Getting the page elements:**
+The first three lines grab the input box, the add button, and the list from the page and give them short names so we can use them easily.
 
-2. **Listening for a Click:** The line `addButton.addEventListener('click', ...)` tells the button to "listen for a click." When it hears one, it runs all the code inside the `{}`. That code does a simple job in order:
-- It gets the text from the input box.
-- It creates a new, blank list item (`<li>`).
-- It puts the user's text inside that list item.
-- It puts the new list item on the page.
-- It clears the text box for the next note.
+2. **When you click the button:**
+The code listens for a click on the "Add" button. When you click it, it does all the steps below.
+
+3. **Making a new note:**
+It grabs the text from the input box and makes a new list item (`<li>`) with that text.
+
+4. **Adding delete button:**
+It also makes a new button that says "Delete". When you click it, the note gets removed.
+
+5. **Showing it on the page:**
+The delete button is added to the note, then the full note (text + delete button) is added to the list. The input box is cleared so you're ready to type the next note.
+
 
 ---
 ## How to use
