@@ -1,18 +1,24 @@
 body {
-    font-family: sans-serif; /* Use a nicer font */    
+    font-family: sans-serif;
     align-items: center;
-    /* These next two lines are just part of the centering spell */
     display: flex;
     flex-direction: column;
 }
 
-/* Style each note that gets added */
 #notes-list li {
-    margin-top: 5px;         /* Add a tiny bit of space between notes */
-    padding: 6px;            /* Add a tiny bit of space inside the note box */
+    margin-top: 5px;
+    padding: 6px;
 }
 
-/* Add some space above the button */
 #add-button {
-    margin-top: 8px; /* Pushes the button down by 8 pixels */
+    margin-top: 8px;
+}
+
+/* new CSS for delete button */
+#notes-list button {
+    margin-left: 10px;
+    cursor: pointer;
+    color: red;
+    background-color: rgb(255, 227, 227);
+    border-color: coral;
 }
