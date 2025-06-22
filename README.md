@@ -106,39 +106,42 @@ const addButton = document.getElementById('add-button');
 const notesList = document.getElementById('notes-list');
 
 addButton.addEventListener('click', function() {
-    const userText = noteInput.value;
-    const newNote = document.createElement('li');
-    newNote.textContent = userText;
 
-    const deleteButton = document.createElement('button');
-    deleteButton.textContent = "Delete";
 
-    deleteButton.addEventListener('click', function() {
-     newNote.remove();
-    });
+  const userText = noteInput.value.trim();
 
-  newNote.appendChild(deleteButton);
-  notesList.appendChild(newNote);
-  noteInput.value = "";
+  if (userText === "") {
+      return; 
+  }
+
+  const newNote = document.createElement('li');
+  newNote.textContent = userText;
+
+  const deleteButton = document.createElement('button');
+  deleteButton.textContent = "Delete";
+
+deleteButton.addEventListener('click', function() {
+  newNote.remove();
+});
+
+newNote.appendChild(deleteButton);
+notesList.appendChild(newNote);
+noteInput.value = "";
 
 });
 ```
 
-1. **Getting the page elements:**
-The first three lines grab the input box, the add button, and the list from the page and give them short names so we can use them easily.
+1. **Getting the page elements:** The first three lines grab the input box, the add button, and the list from the page and give them short names so we can use them easily.
 
-2. **When you click the button:**
-The code listens for a click on the "Add" button. When you click it, it does all the steps below.
+2. **When you click the button:** The code listens for a click on the "Add" button. When you click it, it does all the steps below.
 
-3. **Making a new note:**
-It grabs the text from the input box and makes a new list item (`<li>`) with that text.
+3. **Checking the text:** It grabs the text from the input box and cleans it up with .trim() to remove any blank spaces at the start or end. If the cleaned-up text is empty, it stops right there so a blank note can't be added.
 
-4. **Adding delete button:**
-It also makes a new button that says "Delete". When you click it, the note gets removed.
+4. **Making a new note:** If the text is not empty, it makes a new list item (`<li>`) with that text.
 
-5. **Showing it on the page:**
-The delete button is added to the note, then the full note (text + delete button) is added to the list. The input box is cleared so you're ready to type the next note.
+5. **Adding delete button:** It also makes a new button that says "Delete". When you click this specific button, its note gets removed.
 
+6. **Showing it on the page:** The delete button is added to the note, then the full note (text + delete button) is added to the list. The input box is cleared so you're ready to type the next note.
 
 ---
 ## How to use
