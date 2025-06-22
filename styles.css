@@ -14,11 +14,25 @@ body {
     margin-top: 8px;
 }
 
-/* new CSS for delete button */
 #notes-list button {
     margin-left: 10px;
     cursor: pointer;
+}
+
+/* new code */
+
+/* this code is responsible for the edit/save button */
+#notes-list .edit-btn {
+    color: green;
+    background-color: rgb(208, 255, 200);
+    border-color: darkseagreen;
+}
+
+/* this code is responsible for the delete button */
+#notes-list .delete-btn {
     color: red;
     background-color: rgb(255, 227, 227);
     border-color: coral;
 }
+
+/* new code end*/

@@ -54,6 +54,15 @@ body {
 #notes-list button {
     margin-left: 10px;
     cursor: pointer;
+}
+
+#notes-list .edit-btn {
+    color: green;
+    background-color: rgb(208, 255, 200);
+    border-color: darkseagreen;
+}
+
+#notes-list .delete-btn {
     color: red;
     background-color: rgb(255, 227, 227);
     border-color: coral;
@@ -63,7 +72,9 @@ body {
 - `body`: Styles the whole page. Uses a clean font and centers everything with flexbox.
 - `#notes-list li`: Adds space between notes and a bit of padding inside each one.
 - `#add-button`: Adds space above the "Add" button so it's not squished against the input box.
-- `#notes-list button`: Styles the delete button. Pushes it away from the note text, makes the cursor a pointer, and gives it red-ish colors so it stands out.
+- `#notes-list button`: This is a general style that applies to all buttons in our notes list. It gives them some space and makes the mouse cursor a pointer.
+- `#notes-list .edit-btn`: This is a **specific** style for the Edit button. It looks for any element with the class `.edit-btn` inside our notes list and gives it green "safe" colors.
+- `#notes-list .delete-btn`: This is a **specific** style for the Delete button, giving it red "danger" colors. These specific rules override any general styles.
 
 ---
 #### HTML
@@ -106,42 +117,60 @@ const addButton = document.getElementById('add-button');
 const notesList = document.getElementById('notes-list');
 
 addButton.addEventListener('click', function() {
-
-
   const userText = noteInput.value.trim();
-
   if (userText === "") {
       return; 
   }
 
   const newNote = document.createElement('li');
-  newNote.textContent = userText;
+  const textSpan = document.createElement('span');
+  textSpan.textContent = userText; 
+
+  const editButton = document.createElement('button'); 
+  editButton.textContent = "Edit";
+  editButton.className = "edit-btn";
+
+  editButton.addEventListener('click', function() {
+    if (editButton.textContent === "Edit") {
+        textSpan.contentEditable = true;
+        textSpan.focus();
+        editButton.textContent = "Save";
+    } else {
+        textSpan.contentEditable = false;
+        editButton.textContent = "Edit";
+    }
+  });
 
   const deleteButton = document.createElement('button');
   deleteButton.textContent = "Delete";
+  deleteButton.className = "delete-btn";
 
-deleteButton.addEventListener('click', function() {
-  newNote.remove();
-});
+  deleteButton.addEventListener('click', function() {
+    newNote.remove();
+  });
 
-newNote.appendChild(deleteButton);
-notesList.appendChild(newNote);
-noteInput.value = "";
+  newNote.appendChild(textSpan);
+  newNote.appendChild(editButton);
+  newNote.appendChild(deleteButton);
+  notesList.appendChild(newNote);
 
+  noteInput.value = "";
 });
 ```
 
-1. **Getting the page elements:** The first three lines grab the input box, the add button, and the list from the page and give them short names so we can use them easily.
-
-2. **When you click the button:** The code listens for a click on the "Add" button. When you click it, it does all the steps below.
-
-3. **Checking the text:** It grabs the text from the input box and cleans it up with .trim() to remove any blank spaces at the start or end. If the cleaned-up text is empty, it stops right there so a blank note can't be added.
-
-4. **Making a new note:** If the text is not empty, it makes a new list item (`<li>`) with that text.
-
-5. **Adding delete button:** It also makes a new button that says "Delete". When you click this specific button, its note gets removed.
-
-6. **Showing it on the page:** The delete button is added to the note, then the full note (text + delete button) is added to the list. The input box is cleared so you're ready to type the next note.
+1. **Getting the page elements**: The first three lines grab the input box, the add button, and the list from the page and give them short names so we can use them easily.
+2. **When you click the button**: The code listens for a click on the "Add" button. When you click it, it does all the steps below.
+3. **Checking the text**: It grabs the text from the input box and cleans it up with `.trim()`. If the text is empty, it stops so a blank note can't be added.
+4. **Making the note parts**: It creates the elements needed for a full note:
+   - A list item (`<li>`) as the main container.
+  - A `<span>` to hold only the note's text. This is important because it lets us edit the text without affecting the buttons.
+  - An "Edit" button.
+  - A "Delete" button.
+5. **Tagging the buttons**: It gives each button a `className` (`"edit-btn"` and `"delete-btn"`). This is how the CSS file knows which button gets the green style and which gets the red style.
+6. **Adding the button brains**:
+   - **Edit Button**: It teaches the Edit button how to work. When clicked, it checks if it says "Edit". If so, it makes the text editable and changes its own text to "Save". If it says "Save", it does the opposite.
+   - **Delete Button**: It tells the Delete button to remove the entire note (`<li>`) when clicked.
+7. **Showing it on the page**: It assembles the note by putting the text, Edit button, and Delete button inside the list item (`<li>`). Then it adds the finished note to the page and clears the input box.
 
 ---
 ## How to use
@@ -151,7 +180,9 @@ Using the live app is simple:
 1. Click the "Live Demo" link at the top of this page.
 2. Type a note into the text box.
 3. Click the "Add" button.
-4. Your note will instantly appear on the page below!
+4. Your note will instantly appear with "Edit" and "Delete" buttons.
+5. Click "Edit" to change your note's text, then click "Save".
+6. Click "Delete" to remove the note forever.
 
 ---
 ## A Note on the Learning Process
