@@ -19,20 +19,40 @@ body {
     cursor: pointer;
 }
 
-/* new code */
-
-/* this code is responsible for the edit/save button */
 #notes-list .edit-btn {
     color: green;
     background-color: rgb(208, 255, 200);
-    border-color: darkseagreen;
+    border-radius: 3px;
+    border: 1px solid darkseagreen;
 }
 
-/* this code is responsible for the delete button */
 #notes-list .delete-btn {
     color: red;
     background-color: rgb(255, 227, 227);
-    border-color: coral;
+    border-radius: 3px;
+    border: 1px solid coral;
 }
 
-/* new code end*/
+/* new code starts here */
+
+/* selection button with different options */
+#sort-controls {
+    margin: 15px 0;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* sort button */
+#sort-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #e0e0ff;
+    border: 1px solid #a0a0ff;
+    border-radius: 3px;
+}
+
+/* new code starts here */

@@ -13,7 +13,22 @@
     <input id="note-input" placeholder="Type a note...">
     
     <button id="add-button">Add</button>
-    
+
+<!--new code start here-->
+
+<div id="sort-controls">
+    <label for="sort-method">Sort by:</label>
+    <select id="sort-method">
+        <option value="newest">Newest First</option>
+        <option value="oldest">Oldest First</option>
+        <option value="a-z">A-Z</option>
+        <option value="z-a">Z-A</option>
+    </select>
+    <button id="sort-button">Sort</button>
+</div>
+
+<!--new code start here-->
+
     <ul id="notes-list"></ul>
 
     <script src="simple_note_app.js"></script>

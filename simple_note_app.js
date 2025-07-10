@@ -2,28 +2,45 @@ const noteInput = document.getElementById('note-input');
 const addButton = document.getElementById('add-button');
 const notesList = document.getElementById('notes-list');
 
-// This adds the `saveNotes` helper function and begins defining the `buildNote` helper,
-// which creates the main list item and the text span for a note.
-//new code
+// New: Get references to sorting UI elements and create timestamp storage
+//new code starts here
+const sortMethodSelect = document.getElementById('sort-method');
+const sortButton = document.getElementById('sort-button');
+const noteTimestamps = {}; // Object to store note creation times
+//new code ends here
+
 const saveNotes = () => {
-  const noteTexts = Array.from(notesList.querySelectorAll('span')).map(span => span.textContent);
-  localStorage.setItem('notes', JSON.stringify(noteTexts));
+
+// New: Enhanced saving to include note IDs and timestamps
+//new code starts here
+  const noteData = Array.from(notesList.children).map(note => ({
+    text: note.querySelector('span').textContent, // Note content
+    id: note.dataset.id, // Unique identifier
+    timestamp: noteTimestamps[note.dataset.id] // Creation time
+  }));
+  
+  localStorage.setItem('notes', JSON.stringify(noteData)); // Save full data
+//new code ends here
+
 };
 
 const buildNote = (text) => {
     const newNote = document.createElement('li');
     const textSpan = document.createElement('span');
     textSpan.textContent = text;
-//new code end here
+
+// New: Add unique ID and track creation time
+//new code starts here
+    const noteId = 'note-' + Date.now(); // Generate unique ID
+    newNote.dataset.id = noteId; // Attach to DOM element
+    noteTimestamps[noteId] = Date.now(); // Store creation time
+//new code ends here
 
     const editButton = document.createElement('button');
     editButton.textContent = "Edit";
     editButton.className = "edit-btn";
 
-// This adds the event listener to the "Edit" button.
-//new code
     editButton.addEventListener('click', () => {
-//new code end here
 
         if (editButton.textContent === "Edit") {
             textSpan.contentEditable = true;
@@ -33,10 +50,7 @@ const buildNote = (text) => {
             textSpan.contentEditable = false;
             editButton.textContent = "Edit";
 
-// This calls the save function to ensure that any change from an edit is saved to the browser.
-//new code
-            saveNotes(); // Save when an edit is finished
-//new code end here
+            saveNotes();
         }
     });
 
@@ -44,22 +58,49 @@ const buildNote = (text) => {
     deleteButton.textContent = "Delete";
     deleteButton.className = "delete-btn";
 
-// This adds the event listener to the "Delete" button and makes sure the change is saved.
-//new code
+
     deleteButton.addEventListener('click', () => {
         newNote.remove();
-        saveNotes(); // Save when a note is deleted
+        saveNotes();
     });
-//new code ends here
 
     newNote.appendChild(textSpan);
     newNote.appendChild(editButton);
     newNote.appendChild(deleteButton);
     notesList.appendChild(newNote);
 
-// This line closes the `buildNote` helper function.
-//new code
 };
+
+// New: Sorting functionality implementation
+//new code starts here
+function sortNotes() {
+    const method = sortMethodSelect.value; // Get selected sort method
+    const notes = Array.from(notesList.children); // Convert to array
+    
+    // Compare notes based on selected criteria
+    notes.sort((a, b) => {
+        const aText = a.querySelector('span').textContent.toLowerCase();
+        const bText = b.querySelector('span').textContent.toLowerCase();
+        const aTime = noteTimestamps[a.dataset.id]; // Get note A time
+        const bTime = noteTimestamps[b.dataset.id]; // Get note B time
+        
+        // Apply different comparison methods
+        switch(method) {
+            case 'newest': return bTime - aTime; // Newest first
+            case 'oldest': return aTime - bTime; // Oldest first
+            case 'a-z': return aText.localeCompare(bText); // Alphabetical
+            case 'z-a': return bText.localeCompare(aText); // Reverse alpha
+            default: return 0; // No change
+        }
+    });
+    
+    // Re-add notes in sorted order
+    notes.forEach(note => notesList.appendChild(note));
+    saveNotes(); // Persist new order
+}
+
+// Connect sort button to sorting function
+sortButton.addEventListener('click', sortNotes);
 //new code ends here
 
 addButton.addEventListener('click', function() {
@@ -67,17 +108,20 @@ addButton.addEventListener('click', function() {
     if (userText === "") {
         return;
     }
-  
-// These two lines now use our new helper functions to create a note on the page and then save the list.
-//new code
+
     buildNote(userText);
     saveNotes(); 
-//new code ends here
 
     noteInput.value = "";
 });
 
-// This final new line loads any saved notes from the browser when the page first opens.
-// new code to add
-JSON.parse(localStorage.getItem('notes') || '[]').forEach(note => buildNote(note));
-// END of new code to add
+// Modified: Enhanced note loading with timestamp restoration
+//new modified code starts here
+const savedNotes = JSON.parse(localStorage.getItem('notes') || '[]');
+savedNotes.forEach(note => {
+    buildNote(note.text); // Recreate note
+    if (note.id) {
+        noteTimestamps[note.id] = note.timestamp; // Restore timestamp
+    }
+});
+//new modified code ends here
