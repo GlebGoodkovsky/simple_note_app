@@ -68,10 +68,6 @@ body {
     padding: 6px;
 }
 
-#add-button {
-    margin-top: 8px;
-}
-
 #notes-list button {
     margin-left: 10px;
     cursor: pointer;
@@ -133,9 +129,10 @@ body {
 <body>
     <h1>My Notes</h1>
     
-    <input id="note-input" placeholder="Type a note...">
-    
-    <button id="add-button">Add</button>
+    <div id="input-container">
+        <input id="note-input" placeholder="Type a note...">
+        <button id="add-button">Add</button>
+    </div>
 
 <div id="sort-controls">
     <label for="sort-method">Sort by:</label>
