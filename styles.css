@@ -1,3 +1,6 @@
+/* === BASE STYLES MODIFIED START === */
+/* Modified: Improved container styling with rounded corners and spacing */
+/*modified code starts here*/
 body {
     font-family: sans-serif;
     align-items: center;
@@ -5,23 +8,152 @@ body {
     flex-direction: column;
 }
 
-#notes-list li {
-    padding: 6px;
+#input-container {
+    background-color: #f5f5f5;
+    margin: 20px 0;
+    padding: 18.5px;
+    border-radius: 40px; /* Changed from 5px to 40px */
+    width: 80%; /* Added width */
+    max-width: 600px; /* Added max-width */
+    display: flex; /* Changed to flex layout */
+    gap: 10px; /* Added gap */
 }
 
-#notes-list button {
-    margin-left: 10px;
+#note-input {
+    flex: 1; /* Takes available space */
+    padding: 10px 15px; /* Added padding */
+    border-radius: 20px; /* Added rounded corners */
+    border: 1px solid #ddd; /* Added border */
+}
+
+#add-button {
+    padding: 10px 20px; /* Added padding */
+    border-radius: 20px; /* Added rounded corners */
+    background-color: #e0edff;
+    border: 1px solid #9fa8ff;
     cursor: pointer;
 }
 
-#input-container {
+#sort-controls {
+    margin: 15px 0;
+    margin-top: -10px;
+    padding: 10px;
     background-color: #f5f5f5;
-    margin: 5px 10;
-    margin-top: -5px;
-    padding: 18.5px;
-    border-radius: 5px;
+    border-radius: 40px; /* Changed from 5px to 40px */
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 80%; /* Added width */
+    max-width: 615px; /* Added max-width */
 }
 
+#sort-button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #e0edff;
+    border: 1px solid #a0a9ff;
+    border-radius: 15px; /* Changed from 3px to 15px */
+}
+/*modified code ends here*/
+
+/* New: Remove focus outlines globally */
+/*new code starts here*/
+*:focus {
+    outline: none !important;
+}
+/*new code ends here*/
+
+/* Modified: Complete note styling overhaul */
+/*modified code starts here*/
+/* === NOTE STYLING STARTS === */
+#notes-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    max-width: 590px;
+    padding: 0;
+    margin: 0 auto;
+    list-style-type: none; /* Removed bullet points */
+}
+
+#notes-list li {
+    margin-top: 12px;
+    padding: 0;
+    border-radius: 40px; /* Added rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Added shadow */
+    background-color: #fff;
+    transition: all 0.3s ease; /* Added transition */
+    border: 1px solid #e0e0e0;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding-right: 50px; /* Added space for delete button */
+}
+
+#notes-list li span {
+    display: block;
+    width: 100%;
+    word-wrap: break-word; /* Improved text wrapping */
+    white-space: pre-wrap; /* Preserve line breaks */
+    padding: 15px 20px; /* Added padding */
+    box-sizing: border-box; /* Include padding in width */
+    cursor: pointer;
+}
+
+#notes-list li:hover {
+    background-color: #f4f7fa; /* Hover background */
+    transform: translateY(-2px); /* Lift effect */
+    box-shadow: 0 5px 10px rgba(0,0,0,0.15); /* Enhanced shadow */
+}
+
+#notes-list li.editing {
+    box-shadow: 0 0 0 2px #4a90e2; /* Blue border when editing */
+    background-color: #f0f7ff; /* Light blue background */
+}
+/* === NOTE STYLING ENDS === */
+/*modified code ends here*/
+
+/* New: Delete button styling with hover effects */
+/*new code starts here*/
+/* === DELETE BUTTON STYLING STARTS === */
+.delete-btn {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    opacity: 0.3; /* Partially visible by default */
+    transition: all 0.3s ease; /* Smooth transition */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%; /* Circular button */
+    font-size: 18px;
+}
+
+#notes-list li:hover .delete-btn {
+    opacity: 1; /* Fully visible on hover */
+    background-color: #fcdee2; /* Light red background */
+}
+
+.delete-btn:hover {
+    transform: translateY(-50%) scale(1.1); /* Slight enlargement */
+}
+
+.delete-btn:active {
+    transform: translateY(-50%) scale(0.95); /* Click effect */
+}
+/* === DELETE BUTTON STYLING ENDS === */
+/*new code ends here*/
+
+/* Removed: Old button styles (edit-btn and delete-btn) */
+/*deleted code starts here*/
+/* 
 #notes-list .edit-btn {
     color: green;
     background-color: rgb(208, 255, 200);
@@ -34,22 +166,6 @@ body {
     background-color: rgb(255, 227, 227);
     border-radius: 3px;
     border: 1px solid coral;
-}
-
-#sort-controls {
-    margin: 15px 0;
-    margin-top: 10px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-#sort-button {
-    padding: 5px 10px;
-    cursor: pointer;
-    background-color: #e0e0ff;
-    border: 1px solid #a0a0ff;
-    border-radius: 3px;
-}
+} 
+*/
+/*deleted code ends here*/
