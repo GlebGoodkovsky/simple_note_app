@@ -10,10 +10,6 @@ body {
     padding: 6px;
 }
 
-#add-button {
-    margin-top: 8px;
-}
-
 #notes-list button {
     margin-left: 10px;
     cursor: pointer;
