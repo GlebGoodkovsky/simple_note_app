@@ -64,13 +64,20 @@ body {
 }
 
 #notes-list li {
-    margin-top: 5px;
     padding: 6px;
 }
 
 #notes-list button {
     margin-left: 10px;
     cursor: pointer;
+}
+
+#input-container {
+    background-color: #f5f5f5;
+    margin: 5px 10;
+    margin-top: -5px;
+    padding: 18.5px;
+    border-radius: 5px;
 }
 
 #notes-list .edit-btn {
@@ -89,6 +96,7 @@ body {
 
 #sort-controls {
     margin: 15px 0;
+    margin-top: 10px;
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 5px;
@@ -96,7 +104,6 @@ body {
     align-items: center;
     gap: 10px;
 }
-
 #sort-button {
     padding: 5px 10px;
     cursor: pointer;
