@@ -5,17 +5,6 @@ body {
     flex-direction: column;
 }
 
-#input-container {
-    background-color: #f5f5f5;
-    margin: 20px 0;
-    padding: 18.5px;
-    border-radius: 40px;
-    width: 80%;
-    max-width: 600px;
-    display: flex;
-    gap: 10px;
-}
-
 #note-input {
     flex: 1;
     padding: 10px 15px;
@@ -29,19 +18,6 @@ body {
     background-color: #e0edff;
     border: 1px solid #9fa8ff;
     cursor: pointer;
-}
-
-#sort-controls {
-    margin: 15px 0;
-    margin-top: -10px;
-    padding: 10px;
-    background-color: #f5f5f5;
-    border-radius: 40px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 80%;
-    max-width: 620px;
 }
 
 #sort-button {
@@ -135,7 +111,6 @@ body {
 }
 
 /* Start of new Dark Mode and Toggle Button CSS */
-
 /* --- Style for the new toggle button --- */
 #theme-toggle {
     position: absolute;
@@ -159,8 +134,8 @@ body.dark-mode {
     color: #e0e0e0;
 }
 
-body.dark-mode #input-container,
-body.dark-mode #sort-controls {
+/* REPLACE IT WITH THIS */
+body.dark-mode #controls-container {
     background-color: #1e1e1e;
     border: 1px solid #333;
 }
@@ -203,3 +178,18 @@ body.dark-mode #notes-list li:hover .delete-btn {
 }
 
 /* End of new Dark Mode and Toggle Button CSS */
+
+/* ADD THIS NEW BLOCK */
+#controls-container {
+    background-color: #f5f5f5;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 40px;
+    width: 80%;
+    max-width: 650px; /* Slightly wider to accommodate all controls */
+    display: flex;
+    flex-wrap: wrap; /* Allows items to drop to the next line on small screens */
+    justify-content: center; /* Centers items when they wrap */
+    align-items: center;
+    gap: 10px; /* Spacing between all items */
+}

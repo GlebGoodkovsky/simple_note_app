@@ -7,19 +7,16 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>My Notes</h1>
+    <h1>My Notes</h1>    
+    <button id="theme-toggle">☀️</button>
     
-        <!-- start of new dark mode toggle button -->
-        <button id="theme-toggle">☀️</button>
-        <!-- end of new dark mode toggle button -->
-
-
-    <div id="input-container">
+    <!-- new modified code -->
+    <div id="controls-container">
+        <!-- Items from the old input-container -->
         <input id="note-input" placeholder="Type a note...">
         <button id="add-button">Add</button>
-    </div>
-
-    <div id="sort-controls">
+        
+        <!-- Items from the old sort-controls -->
         <label for="sort-method">Sort by:</label>
         <select id="sort-method">
             <option value="newest">Newest First</option>
@@ -28,10 +25,8 @@
             <option value="z-a">Z-A</option>
         </select>
         <button id="sort-button">Sort</button>
-        
-
-
     </div>
+    <!-- end new modified code -->
 
     <ul id="notes-list"></ul>
 
