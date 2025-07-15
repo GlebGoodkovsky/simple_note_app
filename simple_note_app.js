@@ -59,12 +59,24 @@ const buildNote = (text) => {
         saveNotes();
     });
 
+    // new change: Logic for multi-line notes ---
     textSpan.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter') {
-            e.preventDefault();
-            textSpan.blur();
+        // OLD CODE (for reference):
+        // if (e.key === 'Enter') {
+        //     e.preventDefault();
+        //     textSpan.blur();
+        // }
+
+        // NEW CODE:
+        // This checks if 'Enter' was pressed AND the 'Shift' key was NOT being held down.
+        // If true, it saves the note. If false (e.g., Shift+Enter), it does nothing,
+        // allowing the browser to create a new line by default.
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevents a new line from being created on final save
+            textSpan.blur();    // Exits editing mode and triggers the save
         }
     });
+    // end of change
 
     notesList.appendChild(newNote);
 };
@@ -109,47 +121,26 @@ savedNotes.forEach(note => {
     }
 });
 
-// Start of New Dark Mode JavaScript Logic
-
-// 1. Find the theme button and the main page area (the body).
 const themeToggle = document.getElementById('theme-toggle');
 const body = document.body;
 
-// 2. Tell the browser what to do when the theme button is clicked.
 themeToggle.addEventListener('click', () => {
-    // This is like a light switch. It adds the "dark-mode" style if it's off, 
-    // or removes it if it's on. This action is what makes the CSS change all the colors.
     body.classList.toggle('dark-mode');
-
-    // 3. After switching the style, update the button icon and save the choice.
     if (body.classList.contains('dark-mode')) {
-        // If the page is now in dark mode, change the button to a moon icon.
         themeToggle.textContent = '🌙';
-        // Also, save the word 'dark' in the browser's memory so it remembers the choice for next time.
         localStorage.setItem('theme', 'dark');
     } else {
-        // If the page is back in light mode, change the button to a sun icon.
         themeToggle.textContent = '☀️';
-        // And save the word 'light' in the browser's memory.
         localStorage.setItem('theme', 'light');
     }
 });
 
-// 4. This part runs every time the page first loads.
 function applySavedTheme() {
-    // Look in the browser's memory to see if a theme choice was saved from a previous visit.
     const savedTheme = localStorage.getItem('theme');
-    
-    // If the browser remembers the user chose 'dark' mode last time...
     if (savedTheme === 'dark') {
-        // ...then turn on dark mode and show the moon icon right away.
         body.classList.add('dark-mode');
         themeToggle.textContent = '🌙';
     }
-    // We don't need to do anything for light mode, because the page starts that way by default.
 }
 
-// 5. Finally, run the code we just wrote to check for a saved theme.
 applySavedTheme();
-
-// End of New Dark Mode JavaScript Logic
