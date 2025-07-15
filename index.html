@@ -9,28 +9,32 @@
 <body>
     <h1>My Notes</h1>    
     <button id="theme-toggle">☀️</button>
-    
+
+<!-- 
+  MODIFICATION: The layout of the controls inside this container has been changed.
+  The "Sort by:" label was removed, and the sort controls were grouped together.
+-->
+<div id="controls-container">
+
     <!-- 
-      MODIFICATION: This entire container was re-organized.
-      The sort controls were moved to the left, and the note input was moved to the right.
+      MODIFICATION: This new 'sort-group' div was ADDED. 
+      It wraps the dropdown and the sort button so they can be styled 
+      as a single, seamless "pill" shape in the desktop view.
     -->
-    <div id="controls-container">
-        <!-- These sorting controls were moved to appear first. -->
-        <label for="sort-method">Sort by:</label>
+    <div class="sort-group">
         <select id="sort-method">
             <option value="newest">Newest First</option>
             <option value="oldest">Oldest First</option>
             <option value="a-z">A-Z</option>
             <option value="z-a">Z-A</option>
         </select>
-        <!-- MODIFICATION: The class "control-btn" was added to unify its style. -->
         <button id="sort-button" class="control-btn">Sort</button>
-
-        <!-- These input controls were moved to appear second. -->
-        <input id="note-input" placeholder="Type a note...">
-        <!-- MODIFICATION: The class "control-btn" was added to unify its style. -->
-        <button id="add-button" class="control-btn">Add</button>
     </div>
+
+    <!-- These elements remain, but are no longer next to the sort controls in the HTML structure. -->
+    <input id="note-input" placeholder="Type a note...">
+    <button id="add-button" class="control-btn">Add</button>
+</div>
 
     <ul id="notes-list"></ul>
 

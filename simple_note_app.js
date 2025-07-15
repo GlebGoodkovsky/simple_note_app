@@ -59,25 +59,12 @@ const buildNote = (text) => {
         saveNotes();
     });
 
-    // new change: Logic for multi-line notes ---
     textSpan.addEventListener('keydown', (e) => {
-        // OLD CODE (for reference):
-        // if (e.key === 'Enter') {
-        //     e.preventDefault();
-        //     textSpan.blur();
-        // }
-
-        // NEW CODE:
-        // This checks if 'Enter' was pressed AND the 'Shift' key was NOT being held down.
-        // If true, it saves the note. If false (e.g., Shift+Enter), it does nothing,
-        // allowing the browser to create a new line by default.
         if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault(); // Prevents a new line from being created on final save
-            textSpan.blur();    // Exits editing mode and triggers the save
+            e.preventDefault();
+            textSpan.blur();
         }
     });
-    // end of change
-
     notesList.appendChild(newNote);
 };
 
