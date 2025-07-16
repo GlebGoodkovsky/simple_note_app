@@ -11,12 +11,12 @@ body {
     flex-direction: column;
 }
 
-/* MODIFICATION: This rule was moved from the bottom of the file to here for better organization. */
 #controls-container {
     background-color: #f5f5f5;
     margin: 20px 0;
     padding: 15px;
     border-radius: 40px;
+    border: 1px solid #e3e3e3;
     width: 80%;
     max-width: 650px;
     display: flex;
@@ -42,22 +42,15 @@ body {
     white-space: nowrap;
 }
 
-/* 
-  MODIFICATION: This entire rule for #sort-method is NEW.
-  Its purpose is to make the dropdown menu look like a custom button, matching the other controls.
-*/
 #sort-method {
-    /* These three lines remove the default browser/OS styling from the dropdown. */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    /* These styles make it look visually identical to the .control-btn class. */
     padding: 10px 20px;
     border-radius: 20px;
     background-color: #fff;
     border: 1px solid #9fa8ff;
     cursor: pointer;
-    /* MODIFICATION: The custom arrow (background-image) was explicitly REMOVED for a cleaner look. */
 }
 
 
@@ -184,12 +177,10 @@ body.dark-mode #note-input::placeholder {
     color: #888;
 }
 
-/* MODIFICATION: This entire rule for the dropdown in dark mode is NEW. */
 body.dark-mode #sort-method {
     background-color: #252525;
     color: #e0e0e0;
     border: 1px solid #444;
-    /* MODIFICATION: The custom arrow (background-image) was also REMOVED from dark mode. */
 }
 
 body.dark-mode .control-btn {
@@ -209,7 +200,14 @@ body.dark-mode #notes-list li:hover {
     box-shadow: 0 5px 10px rgba(0,0,0,0.4);
 }
 
-body.dark--mode #notes-list li.editing {
+/* 
+    MODIFIED: The typo 'dark--mode' (with two hyphens) was fixed here.
+    This ensures the blue highlight style works correctly when editing a note in dark mode.
+
+    The previous incorrect line was:
+    body.dark--mode #notes-list li.editing {
+*/
+body.dark-mode #notes-list li.editing {
     background-color: #2a3a57;
     box-shadow: 0 0 0 2px #5a9ce2;
 }
@@ -224,17 +222,14 @@ body.dark-mode #notes-list li:hover .delete-btn {
   ================================
 */
 
-/* MODIFICATION: This entire media query block is NEW to handle mobile screen sizes. */
 @media (max-width: 600px) {
 
-    /* This makes the control bar more compact and forces it to a single line. */
     #controls-container {
         flex-wrap: nowrap;
         padding: 8px 12px;
         gap: 6px;
     }
     
-    /* This combined selector ensures all controls have the same height and appearance on mobile. */
     #sort-method,
     .control-btn,
     #note-input {
@@ -245,7 +240,6 @@ body.dark-mode #notes-list li:hover .delete-btn {
         border: 1px solid transparent; 
     }
 
-    /* This rule constrains the width of the dropdown to make room for other elements. */
     #sort-method {
         max-width: 115px;
     }

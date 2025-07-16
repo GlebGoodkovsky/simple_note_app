@@ -10,17 +10,7 @@
     <h1>My Notes</h1>    
     <button id="theme-toggle">☀️</button>
 
-<!-- 
-  MODIFICATION: The layout of the controls inside this container has been changed.
-  The "Sort by:" label was removed, and the sort controls were grouped together.
--->
 <div id="controls-container">
-
-    <!-- 
-      MODIFICATION: This new 'sort-group' div was ADDED. 
-      It wraps the dropdown and the sort button so they can be styled 
-      as a single, seamless "pill" shape in the desktop view.
-    -->
     <div class="sort-group">
         <select id="sort-method">
             <option value="newest">Newest First</option>
@@ -28,10 +18,15 @@
             <option value="a-z">A-Z</option>
             <option value="z-a">Z-A</option>
         </select>
-        <button id="sort-button" class="control-btn">Sort</button>
+        <!-- 
+            REMOVED: The "Sort" button was deleted from here.
+            We don't need it anymore because the notes will sort automatically when you pick an option
+            from the dropdown menu.
+            
+            Previously, this code was here:
+            <button id="sort-button" class="control-btn">Sort</button>
+        -->
     </div>
-
-    <!-- These elements remain, but are no longer next to the sort controls in the HTML structure. -->
     <input id="note-input" placeholder="Type a note...">
     <button id="add-button" class="control-btn">Add</button>
 </div>
