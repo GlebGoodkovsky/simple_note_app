@@ -11,6 +11,20 @@ body {
     flex-direction: column;
 }
 
+/*
+    ================================
+    === Mobile Polish & Fixes ===
+    ================================
+*/
+
+/* This is the magic rule! */
+/* The star (*) applies it to every element. */
+/* -webkit-tap-highlight-color tells mobile browsers what color to flash on tap. */
+/* By setting it to 'transparent', we make that flash invisible. */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+
 #controls-container {
     background-color: #f5f5f5;
     margin: 20px 0;
